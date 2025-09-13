@@ -77,4 +77,44 @@ We wholeheartedly welcome your contributions. If you have ideas, fixes, or enhan
 
 ## **License: Attribution 4.0 International (CC BY 4.0)**
 
+
+### **INSTALLATION **
+
+** Main.tf"
+`` 
+provider "aws" {
+  region = "ap-south-1" # Change if needed
+}
+
+resource "aws_instance" "jenkins_server" {
+  ami           = "ami-0e742cca61fb65051" # Amazon Linux 2 AMI (update if region changes)
+  instance_type = "t2.large"
+  key_name      = "mykey"
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp2"
+  }
+
+  tags = {
+    Name = "jenkins-docker-sonar-java17"
+  }
+}
+
+resource "aws_instance" "monitoring_server" {
+  ami           = "ami-0e742cca61fb65051"
+  instance_type = "t2.medium"
+  key_name      = "mykey"
+
+  root_block_device {
+    volume_size = 12
+    volume_type = "gp2"
+  }
+
+  tags = {
+    Name = "prometheus-grafana"
+  }
+}
+
+
 **Embrace the Spirit of Free Software!** JioTV Go is open-source and free to use. We're committed to keeping it accessible to everyone. If you come across any unauthorized attempts to sell this project, please report them to [me](mailto:mail@rabil.me) so we can take swift action. Your support is essential in safeguarding our project's values. 🙌📜💼
